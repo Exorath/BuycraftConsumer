@@ -4,7 +4,7 @@
 *This consumer is ran on an [Azure function](https://azure.microsoft.com/en-us/services/functions/) on a timed interval (much like a cron job)*
 
 ## Features
-- All purchases are eventually handled once and exactly once, with a 100% undebatable success rate.
+- All purchases are eventually handled once and exactly once, with a 100% undebatable success rate on data changing purchases (things like a chat message may never be send or be send multiple times, though the chance is low, but this is okay).
 - Handling time is tweakable (You can reduce the time between each BuyCraft purchase poll to speed up the execution of the function).
 - The buycraft package contains all the information for what should be executed, this means that the API consumer will not have to be updated when a package updates.
 - the consumer is never down for an unreasonable amount of time: as it is hosted as an azure function, the consumer will be rescheduled on a different node if odd happens.
