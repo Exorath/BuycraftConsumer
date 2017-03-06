@@ -27,3 +27,12 @@ These commands are meant to execute an action: the command will only be deletes 
 The player uuid will be injected in the meta by the consumer, this means that there are still around 130 characters for the action meta.
 
 type 0: An [ActionAPI](#) execution, with the ActionAPI data in the meta field. The ActionAPI allows you to send actions to a player's server/all servers.
+
+## Notes
+
+- Every x seconds get list of unfinished transactions (get-due-players | get-online-commands | delete-commands).
+  - List with players and json data (given as an online command).
+  - Data will je JSON.
+  - Example command: actionapi{"type":"message", "msg":"Thanks for purchasing this rank!"}
+- Send this data with UUID and other needed data
+  - Using POST to the action API (HTTP request)
