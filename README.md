@@ -21,8 +21,10 @@ The saved document should be formatted as {"uuid": "playerId" "price": double, "
 
 
 #### #2-n The action commands
-##### {"type": action_type_enum, "meta": {//action meta//}}
+##### ACTION_TYPE_ENUM{META}
 These commands are meant to execute an action: the command will only be deletes as the action is explicitely executed (this means important data-changing commands like giving 5 chests to the player, should be ATOMIC, the command execution should check whether or not the command was already executed and simply delete the command when it notices this.
+
+EXAMPLE: 0{"type":"chat", "subject": "uuid", "meta": "Thanks for purchasing this rank!"}
 
 The player uuid will be injected in the meta by the consumer, this means that there are still around 130 characters for the action meta.
 
