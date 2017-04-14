@@ -17,7 +17,6 @@
 package com.exorath.buycraftconsumer;
 
 import com.exorath.buycraftconsumer.res.ConsumerSettings;
-import com.exorath.service.commons.tableNameProvider.TableNameProvider;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,12 +32,20 @@ public class Main {
 
     private ConsumerSettings getConsumerSettings() {
         return new ConsumerSettings()
-                .setBuycraftPrivateKey(TableNameProvider.getEnvironmentTableNameProvider("BUYCRAFT_PRIVATE_KEY").getTableName())
-                .setActionAPIAddress(TableNameProvider.getEnvironmentTableNameProvider("ACTIONAPI_SERVICE_ADDRESS").getTableName())
+                .setBuycraftPrivateKey(getEnv("BUYCRAFT_PRIVATE_KEY"))
+                .setActionAPIAddress(getEnv("ACTIONAPI_SERVICE_ADDRESS"))
                 .setInterval(20)
                 .setIntervalUnit(TimeUnit.SECONDS);
     }
 
+    private String getEnv(String field){
+        String envValue = System.getenv(field);
+        if(envValue != null && envValue != "") {
+            return envValue;
+        } else {
+            throw new IllegalStateException("No " + field + " environment variable was provided while trying to load the tableName");
+        }
+    }
     public static void main(String[] args) {
         new Main();
     }

@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: buycraftconsumer
+  labels:
+    app: buycraftconsumer
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: buycraftconsumer
+  type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: buycraftconsumer
+  labels:
+    app: buycraftconsumer
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: buycraftconsumer
+    spec:
+      containers:
+      - name: buycraftconsumer
+        image: exorath/buycraftconsumer
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: BUYCRAFT_PRIVATE_KEY
+          value: "<INSERT_KEY>"
+        - name: ACTIONAPI_SERVICE_ADDRESS
+          value: "ip:port"
