@@ -38,3 +38,6 @@ type 0: An [ActionAPI](#) execution, with the ActionAPI data in the meta field. 
   - Example command: actionapi{"type":"message", "msg":"Thanks for purchasing this rank!"}
 - Send this data with UUID and other needed data
   - Using POST to the action API (HTTP request)
+
+
+
