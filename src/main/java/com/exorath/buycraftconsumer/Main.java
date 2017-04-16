@@ -16,7 +16,11 @@
 
 package com.exorath.buycraftconsumer;
 
+import com.exorath.buycraftconsumer.commandHandlers.ActionAPIHandler;
+import com.exorath.buycraftconsumer.commandHandlers.RankAPIHandler;
 import com.exorath.buycraftconsumer.res.ConsumerSettings;
+import com.exorath.service.actionapi.api.ActionAPIServiceAPI;
+import com.exorath.service.rank.api.RankServiceAPI;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +32,8 @@ public class Main {
 
     public Main() {
         this.buycraftConsumer = new BuycraftConsumer(getConsumerSettings());
+        buycraftConsumer.addHandler(new ActionAPIHandler(new ActionAPIServiceAPI(getEnv("ACTIONAPI_SERVICE_ADDRESS"))));
+        buycraftConsumer.addHandler(new RankAPIHandler(new RankServiceAPI(getEnv("RANK_SERVICE_ADDRESS"))));
     }
 
     private ConsumerSettings getConsumerSettings() {

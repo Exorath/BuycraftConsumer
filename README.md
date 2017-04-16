@@ -46,3 +46,4 @@ type 0: An [ActionAPI](#) execution, with the ActionAPI data in the meta field. 
 | --------- | --- |
 | BUYCRAFT_PRIVATE_KEY | {the private key for your bc acc} |
 | ACTIONAPI_SERVICE_ADDRESS | {ip:port} |
+| RANK_SERVICE_ADDRESS | {ip:port} |
