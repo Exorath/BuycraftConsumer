@@ -128,12 +128,12 @@ public class BuycraftConsumer {
     }
 
     private GetRequest getAuthed(String endpoint) {
-        return Unirest.get(endpoint).header("X-Buycraft-Secret", consumerSettings.getBuycraftPrivateKey());
+        return Unirest.get(url(endpoint)).header("X-Buycraft-Secret", consumerSettings.getBuycraftPrivateKey());
     }
 
 
     private HttpRequestWithBody deleteAuthed(String endpoint) {
-        return Unirest.delete(endpoint).header("X-Buycraft-Secret", consumerSettings.getBuycraftPrivateKey());
+        return Unirest.delete(url(endpoint)).header("X-Buycraft-Secret", consumerSettings.getBuycraftPrivateKey());
     }
 
     private static final String BUYCRAFT_URL = "https://plugin.buycraft.net";
