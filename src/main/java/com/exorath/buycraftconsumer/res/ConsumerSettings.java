@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 public class ConsumerSettings {
     private int interval = 20;
     private TimeUnit intervalUnit = TimeUnit.SECONDS;
-    private String actionAPIAddress;
     private String buycraftPrivateKey;
 
     public int getInterval() {
@@ -42,15 +41,6 @@ public class ConsumerSettings {
 
     public ConsumerSettings setIntervalUnit(TimeUnit intervalUnit) {
         this.intervalUnit = intervalUnit;
-        return this;
-    }
-
-    public String getActionAPIAddress() {
-        return actionAPIAddress;
-    }
-
-    public ConsumerSettings setActionAPIAddress(String actionAPIAddress) {
-        this.actionAPIAddress = actionAPIAddress;
         return this;
     }
 

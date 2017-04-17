@@ -39,7 +39,6 @@ public class Main {
     private ConsumerSettings getConsumerSettings() {
         return new ConsumerSettings()
                 .setBuycraftPrivateKey(getEnv("BUYCRAFT_PRIVATE_KEY"))
-                .setActionAPIAddress(getEnv("ACTIONAPI_SERVICE_ADDRESS"))
                 .setInterval(20)
                 .setIntervalUnit(TimeUnit.SECONDS);
     }

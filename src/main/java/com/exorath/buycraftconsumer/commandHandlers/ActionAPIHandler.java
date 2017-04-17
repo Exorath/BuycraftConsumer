@@ -22,12 +22,15 @@ import com.exorath.buycraftconsumer.res.DuePlayer;
 import com.exorath.service.actionapi.api.ActionAPIServiceAPI;
 import com.exorath.service.actionapi.res.Action;
 import com.exorath.service.actionapi.res.Success;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /**
  * Created by toonsev on 4/14/2017.
  */
 public class ActionAPIHandler implements CommandHandler {
+    private static final Gson GSON = new Gson();
+
     private ActionAPIServiceAPI actionAPIServiceAPI;
 
     public ActionAPIHandler(ActionAPIServiceAPI actionAPIServiceAPI) {
@@ -44,10 +47,13 @@ public class ActionAPIHandler implements CommandHandler {
         try {
 
             String type = command.get("type").getAsString();
-            String subject = command.get("subject").getAsString();
+
+            String subject = command.has("subject") ? command.get("subject").getAsString() : duePlayer.getUuid();
             String destination = command.has("destination") ? command.get("destination").getAsString() : null;
             boolean spigot = command.has("spigot") ? command.get("spigot").getAsBoolean() : true;
-            JsonObject meta = command.get("meta").getAsJsonObject();
+
+            JsonObject meta = command.has("meta") ? command.get("meta").getAsJsonObject() : new JsonObject();
+            meta = GSON.fromJson(meta.toString().replaceAll("%NAME%", duePlayer.getName()).replaceAll("%UUID%", duePlayer.getUuid()), JsonObject.class);
             if (subject.equals("uuid"))
                 subject = duePlayer.getUuid();
             Action action = new Action(subject, destination, type, meta, spigot);
@@ -55,7 +61,7 @@ public class ActionAPIHandler implements CommandHandler {
             if (!success.getSuccess())
                 System.out.println(success.getError());
             return success.getSuccess();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
