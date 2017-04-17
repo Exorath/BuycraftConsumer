@@ -86,6 +86,7 @@ public class BuycraftConsumer {
             return;
         }
         boolean handled = handlers.get(handlerId).handle(GSON.fromJson(handlerJson, JsonObject.class), duePlayer, dueCommand);
+        System.out.println("handled command " + dueCommand.getId() + "(" + dueCommand.getCommand() + "): " + handled);
         if (handled)
             removeDueCommand(duePlayer, dueCommand);
     }
